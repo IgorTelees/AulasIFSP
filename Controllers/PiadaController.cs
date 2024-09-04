@@ -19,6 +19,16 @@ namespace Piadas.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Busca()
+        {
+            return View();
+        }
+        
+        public async Task<IActionResult> ShowSearchResults(String TermoDeBusca)
+        {
+            List<piadas> piadoca = await _context.piadas.Where(f => f.pergunta.Contains(TermoDeBusca)).ToListAsync();
+            return View("Index", piadoca);
+        }
         // GET: Piada
         public async Task<IActionResult> Index()
         {
